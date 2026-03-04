@@ -3,11 +3,6 @@
 import { client, type Meme } from "$lib/api/client";
 import { queryClient } from "$lib/api/queries";
 import { memesQueryFactory } from "$lib/api/queries/memes";
-import type {
-  IBasicDataFeed,
-  LibrarySymbolInfo,
-  ResolutionString,
-} from "$lib/charting_library/charting_library";
 import { MCTradeSubscribe, MCunsubscribe } from "$lib/store/MCWebSocket";
 import { getProjectedMemePriceInNear } from "$lib/util/getProjectedMemePriceInNear";
 
@@ -22,7 +17,7 @@ const lastBarsCache: Map<
   }
 > = new Map();
 
-const MemeCookingDataFeed: IBasicDataFeed = {
+const MemeCookingDataFeed: any = {
   onReady: (callback) => {
     console.log("[onReady]: Method call");
     setTimeout(() => callback({}));
@@ -53,7 +48,7 @@ const MemeCookingDataFeed: IBasicDataFeed = {
       }
       const meme = data.meme;
 
-      const symbolInfo: LibrarySymbolInfo = {
+      const symbolInfo: any = {
         ticker: meme.symbol,
         name: meme.name,
         description: meme.symbol || "",
@@ -73,7 +68,7 @@ const MemeCookingDataFeed: IBasicDataFeed = {
           "30",
           "60",
           "120",
-        ] as ResolutionString[],
+        ],
         volume_precision: 5,
         data_status: "streaming",
         listed_exchange: "MemeCooking",
